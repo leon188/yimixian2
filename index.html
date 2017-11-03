@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link rel="stylesheet" type="text/css" href="css/index.css" />
+		<link rel="stylesheet" type="text/css" href="bootstrap-3.3.7-dist/css/bootstrap.min.css" />
+		<script src="js/vue.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/vue-router.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/vue-resource.js" type="text/javascript" charset="utf-8"></script>
+		<title></title>
+		<style type="text/css">
+			.table{
+				
+			}
+		</style>
+	</head>
+
+	<body>
+		<div id="app">
+
+			<div class="header">
+				<div>
+					<span class="glyphicon glyphicon-menu-left"></span>
+					<span>返回</span>
+				</div>
+				<span>一米鲜</span>
+				<span class="glyphicon glyphicon-option-horizontal"></span>
+			</div>
+			<div class="header-nav">
+				<span>配送至:</span>
+				<span>北京八维研修学院</span>
+				<span class="glyphicon glyphicon-triangle-bottom"></span>
+			</div>
+			<router-view></router-view>
+			<footer>
+				<ul>
+					<li>
+						<router-link to="/home">
+							<img src="img/IMG_0345_06.gif" />
+							<span>商城</span>
+						</router-link>
+					</li>
+					<li>
+						<router-link to="/sale">
+							<img src="img/IMG_0345_11.gif" />
+							<span>促销</span>
+						</router-link>
+					</li>
+					<li>
+						<router-link to="/shop">
+							<img src="img/IMG_0345_03.gif" />
+							<span>购物车</span>
+						</router-link>
+					</li>
+					<li>
+						<router-link to="/my">
+							<img src="img/IMG_0345_08.gif" />
+							<span>我的</span>
+						</router-link>
+					</li>
+				</ul>
+			</footer>
+
+		</div>
+	</body>
+	<template id="home">
+
+		<div class="box">
+			<ul class="list">
+				<li>
+					<router-link to="/home/one">
+						<p class="p">国产水果</p>
+						<p class="p">国民最爱</p>
+					</router-link>
+				</li>
+				<li>
+					<router-link to="/home/two">
+						<p class="p">进口水果</p>
+						<p class="p">洋气十足</p>
+					</router-link>
+				</li>
+				<li>
+					<router-link to="/home/three">
+						<p class="p">冷链直达</p>
+						<p class="p">需单独下单</p>
+					</router-link>
+				</li>
+				<li>
+					<router-link to="/home/four">
+						<p class="p">秒杀闪购</p>
+						<p class="p">11点20点</p>
+					</router-link>
+				</li>
+					<router-link to="/home/five">
+						<p class="p" style="color: #B88686;">特惠换购</p>
+						<p class="p" style="color: #A0B3CE;">0.99元起</p>
+					</router-link>
+				</li>
+				<li>
+					<router-link to="/home/six">
+						<p class="p">千果零食</p>
+						<p class="p">根本停不下来</p>
+					</router-link>
+				</li>
+				<li>
+					<router-link to="/home/seven">
+						<p class="p">超值套餐</p>
+						<p class="p">一键齐全</p>
+					</router-link>
+				</li>
+				<li>
+					<router-link to="/home/eight">
+						<p class="p">工具类</p>
+					</router-link>
+				</li>
+			</ul>
+			<router-view></router-view>
+		</div>
+	</template>
+
+	<template id="sale"><div class="box">销售</div></template>
+
+	<template id="shop">
+		<div class="box">
+		    <table class="table">
+				<tr v-for=" ( val,key ) in goods ">
+					<td class="box"><input type="checkbox" /><!--<label :for="val.id" class="icon icon-checkmark"></label>--></td>
+					<td><img v-bind:src="val.img"></td>
+					<td>
+						<p>{{ val.h1 }}</p>
+						<p>{{ val.h3 }}</p>
+						<p>{{ val.curr | currency}}</p>
+					</td>
+					<td>
+						<button class="button" @click="remove(key)">删除</button>
+						<div>
+							<button @click="minus(val,key)" class="btn">-</button>
+							<span>{{ val.num }}</span>
+							<button @click="plus(val)" class="btn">+</button>
+						</div>
+					</td>
+				</tr>
+				<p style="color: orangered;position: absolute;bottom: 5rem;right: 5rem;">总计{{ total | currency}}</p>
+			</table>
+		</div>
+	</template>
+
+	<template id="my"><div class="box">我的</div></template>
+	
+	<template id="one">
+		<div class="box">
+		    <ul class="list-ul">
+				<li v-for="(val,key) in lists">
+					<img :src="val.img" />
+					<div class="list-box">
+						<div>
+							<h2>{{ val.h1 }}</h2>
+							<h5>{{ val.h3 }}</h5>
+						</div>
+						<div>
+							<p>
+								<button @click="add(key)"> + </button>
+							</p>
+							<h5>{{ val.curr | currency}}</h5>
+						</div>
+					</div>
+				</li>
+			</ul>
+	    </div>
+	</template>
+	
+	<template id="two"><div class="box">TWO</div></template>
+	
+	<template id="three"><div class="box">THREE</div></template>
+	
+	<template id="four"><div class="box">FOUR</div></template>
+	
+	<template id="five"><div class="box">FIVE</div></template>
+	
+	<template id="six"><div class="box">SIX</div></template>
+	
+	<template id="seven"><div class="box">SEVEN</div></template>
+	
+	<template id="eight"><div class="box">EIGHT</div></template>
+
+</html>
+<script src="js/index.js" type="text/javascript" charset="utf-8"></script>
